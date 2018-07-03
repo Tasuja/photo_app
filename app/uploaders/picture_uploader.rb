@@ -1,4 +1,6 @@
 class PictureUploader < CarrierWave::Uploader::Base
+  include CarrierWave::MiniMagick
+  process resize_to_limit: [300, 300]
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -41,7 +43,7 @@ class PictureUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
+  def filename
+    %w(jpg jpeg gif png)
+  end
 end
